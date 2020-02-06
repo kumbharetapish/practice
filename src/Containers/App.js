@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Cart from "./Components/Cart";
+import Cart from "../Components/Cards/Cart";
 import Radium from "radium"
 import "./App.css";
 // import { render } from "react-dom";
