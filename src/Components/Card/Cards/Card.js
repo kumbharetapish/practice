@@ -1,7 +1,7 @@
 import React from "react";
-import "./From.css";
+import "./Card.css";
 
-const Cart = props => {
+const Card = props => {
   return (
     <div className="cartWrapper" onClick={props.clickMe}>
       <img className="CartPreview" src={props.imgSrc} alt={props.name} />
@@ -12,4 +12,4 @@ const Cart = props => {
   );
 };
 
-export default Cart;
+export default Card;
