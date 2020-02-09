@@ -1,10 +1,15 @@
 import React, { Component } from "react";
-import Cart from "./Components/Cart";
-import Radium from "radium"
+import Cards from "../Components/Card/Cards";
+import Cockpit from "../Components/Cockpit/Cockpit";
+import Radium from "radium";
 import "./App.css";
 // import { render } from "react-dom";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("constructor");
+  }
   state = {
     employeeArr: [
       {
@@ -31,13 +36,20 @@ class App extends Component {
     NextState: false
   };
 
+  static getDerivedStateFromProps(props, state) {
+    console.log("App.Js getDerivedStateFrom()",props);
+    return state;
+  }
+
   handelChange = () => {
     let show = this.state.NextState;
     this.setState({
       NextState: !show
     });
   };
-
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
   textHandle = (e, id) => {
     const employeeIndex = this.state.employeeArr.findIndex(p => {
       return p.id === id;
@@ -55,38 +67,32 @@ class App extends Component {
   };
 
   render() {
+    console.log("AppJs Render");
+
     let cartToggle = null;
     if (this.state.NextState) {
       cartToggle = (
         <div className="Wrapper">
-          {this.state.employeeArr.map((data, i) => {
-            return (
-              <Cart
-                key={i}
-                name={data.name}
-                imgSrc={data.imgSrc}
-                position={data.position}
-                change={e => {
-                  this.textHandle(e, data.id);
-                }}
-              />
-            );
-          })}
+          <Cards
+            employeesData={this.state.employeeArr}
+            textHandle={this.textHandle}
+          />
         </div>
       );
     }
 
-    let taggleBtn = "";
-
+    let toggleBtn = "";
     cartToggle === null
-      ? (taggleBtn = "toggleBtnOff")
-      : (taggleBtn = "toggleBtnOn");
+      ? (toggleBtn = "toggleBtnOff")
+      : (toggleBtn = "toggleBtnOn");
 
     return (
       <div className="App">
-        <button type="submit" onClick={this.handelChange} className={taggleBtn}>
-          click Me...!
-        </button>
+        <Cockpit
+          title={this.props.title}
+          clickHandel={this.handelChange}
+          btn={toggleBtn}
+        />
         {cartToggle}
       </div>
     );
