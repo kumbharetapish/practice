@@ -1,15 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Card.css";
 
-const Card = props => {
-  return (
-    <div className="cartWrapper" onClick={props.clickMe}>
-      <img className="CartPreview" src={props.imgSrc} alt={props.name} />
-      <h3> Mr. {props.name}</h3>
-      <h4>{props.position} </h4>
-      <input type="text" onChange={props.change} value={props.name} />
-    </div>
-  );
-};
+class Card extends Component {
+  render() {
+    return (
+      <div className="cartWrapper" onClick={this.props.clickMe}>
+        <img
+          className="CartPreview"
+          src={this.props.imgSrc}
+          alt={this.props.name}
+        />
+        <h3> Mr. {this.props.name}</h3>
+        <h4>{this.props.position} </h4>
+        <input
+          type="text"
+          onChange={this.props.change}
+          value={this.props.name}
+        />
+      </div>
+    );
+  }
+}
 
 export default Card;
